@@ -62,8 +62,6 @@ def get_context(dish, servings):
     context['recipe'] = {}
     compound = {}
     for item in recipe.items():
-        print(item)
         compound[item[0]] = item[1] * servings
     context['recipe'] = compound
-    print(context)
     return context
