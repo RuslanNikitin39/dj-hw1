@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, reverse
 
 DATA = {
     'omlet': {
@@ -28,3 +28,42 @@ DATA = {
 #     'ингредиент2': количество2,
 #   }
 # }
+
+def home_view(request):
+    context = {
+
+    }
+    return render(request, 'calculator/index.html', context)
+
+
+def omlet_view(request):
+    servings = request.GET.get('servings', 1)
+    context = get_context('omlet', int(servings))
+    return render(request, 'calculator/index.html', context)
+
+
+def pasta_view(request):
+    servings = request.GET.get('servings', 1)
+    context = get_context('pasta', int(servings))
+    return render(request, 'calculator/index.html', context)
+
+
+def buter_view(request):
+    servings = request.GET.get('servings', 1)
+    context = get_context('buter', int(servings))
+    return render(request, 'calculator/index.html', context)
+
+
+def get_context(dish, servings):
+    context = {}
+    recipe = DATA.get(dish)
+    if recipe == None:
+        return context
+    context['recipe'] = {}
+    compound = {}
+    for item in recipe.items():
+        print(item)
+        compound[item[0]] = item[1] * servings
+    context['recipe'] = compound
+    print(context)
+    return context
