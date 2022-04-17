@@ -14,9 +14,9 @@ def show_catalog(request):
     if sort == 'name':
         phones = phones.order_by('name')
     elif sort == 'min_price':
-        phones = phones.order_by('-price')
-    elif sort == 'max_price':
         phones = phones.order_by('price')
+    elif sort == 'max_price':
+        phones = phones.order_by('-price')
 
     context = {
         'phones': phones,
