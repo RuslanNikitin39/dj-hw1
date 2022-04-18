@@ -1,4 +1,5 @@
 from django.shortcuts import render, reverse
+from django.http import HttpResponse
 
 DATA = {
     'omlet': {
@@ -29,28 +30,10 @@ DATA = {
 #   }
 # }
 
-def home_view(request):
-    context = {
 
-    }
-    return render(request, 'calculator/index.html', context)
-
-
-def omlet_view(request):
+def dish_view(request, dish):
     servings = request.GET.get('servings', 1)
-    context = get_context('omlet', int(servings))
-    return render(request, 'calculator/index.html', context)
-
-
-def pasta_view(request):
-    servings = request.GET.get('servings', 1)
-    context = get_context('pasta', int(servings))
-    return render(request, 'calculator/index.html', context)
-
-
-def buter_view(request):
-    servings = request.GET.get('servings', 1)
-    context = get_context('buter', int(servings))
+    context = get_context(dish, int(servings))
     return render(request, 'calculator/index.html', context)
 
 
